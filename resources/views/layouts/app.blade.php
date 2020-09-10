@@ -147,16 +147,6 @@
         </div>
         <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        <!-- <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Preferences</h5>
-                <p>...</p>
-            </div>
-        </aside> -->
-        <!-- /.control-sidebar -->
-
         <!-- Main Footer -->
         <footer class="main-footer">
             <strong>Copyright &copy; {{ date('Y') }} <a href="https://www.avianbrands.com">Avian Brands</a>.</strong> All rights reserved.
