@@ -73,12 +73,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
         
         'muser' => [
             'driver' => 'eloquent',
-            'model' => App\MUser::class,
+            'model' => App\Models\MUser::class,
         ],
 
         // 'users' => [

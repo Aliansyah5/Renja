@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\MUser;
+use App\Models\MUser;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -57,6 +57,7 @@ class LoginController extends Controller
 
         $user = MUser::where('Username', $request->username)
             ->where('Passwd', $request->password)
+            ->where('IsDel', 0)
             ->first();
 
         if (isset($user)) {

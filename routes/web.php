@@ -19,3 +19,7 @@ Auth::routes([
 ]);
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/test', function () {
+    return response('Hello world.', 200);
+})->name('test')->middleware('permitted:7,delete');
