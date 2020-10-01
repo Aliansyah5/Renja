@@ -51,6 +51,12 @@ trait AviaPermit
             case 'approve': return substr($mpermit->Permit, 7, 1) == 1;
             case 'approval': return substr($mpermit->Permit, 7, 1) == 1;
 
+            case 'all': 
+                $all = '';
+                for ($i=0; $i < strlen($mpermit->Permit) - 1; $i++)
+                    $all .= '1';
+                return substr($mpermit->Permit, 0, strlen($mpermit->Permit) - 1) === $all;
+
             default: return substr($mpermit->Permit, 0, 1) == 1;
         }
     }
