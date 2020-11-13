@@ -47,9 +47,8 @@ trait AviaPermit
             case 'khusus': return substr($mpermit->Permit, 5, 1) == 1;
             
             case 'void': return substr($mpermit->Permit, 6, 1) == 1;
-            
-            case 'approve': return substr($mpermit->Permit, 7, 1) == 1;
-            case 'approval': return substr($mpermit->Permit, 7, 1) == 1;
+            case 'approve': return substr($mpermit->Permit, 6, 1) == 1;
+            case 'approval': return substr($mpermit->Permit, 6, 1) == 1;
 
             case 'all': 
                 $all = '';
