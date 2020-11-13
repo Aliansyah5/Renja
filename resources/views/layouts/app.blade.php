@@ -161,6 +161,11 @@
                 dateFormat: 'dd/mm/yy',
             });
 
+            $('.select2').select2({
+                placeholder: 'Pilih...',
+                theme: 'bootstrap4',
+            });
+
             if (window.localStorage.getItem('sidebar')) {
                 $('body').addClass('sidebar-collapse');
 
