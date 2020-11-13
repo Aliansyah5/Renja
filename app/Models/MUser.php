@@ -34,33 +34,8 @@ class MUser extends Authenticatable
             parent::setAttribute($key, $value);
     }
 
-    public function permits()
-    {
-        return $this->belongsToMany('App\MMenu', 'mpermit', 'UserID', 'MenuID')->withPivot('Permit');
-    }
-
     public function pegawai()
     {
-        return $this->hasOne('App\MPegawai', 'PegawaiID', 'PegawaiID');
-    }
-
-    public function approval1()
-    {
-        return $this->hasMany('App\HPatrol', 'UserID', 'AppBy1');
-    }
-    
-    public function approval2()
-    {
-        return $this->hasMany('App\HPatrol', 'UserID', 'AppBy2');
-    }
-    
-    public function approval3()
-    {
-        return $this->hasMany('App\HPatrol', 'UserID', 'AppBy3');
-    }
-    
-    public function approval4()
-    {
-        return $this->hasMany('App\HPatrol', 'UserID', 'AppBy4');
+        return $this->hasOne('App\Models\MPegawai', 'PegawaiID', 'PegawaiID');
     }
 }

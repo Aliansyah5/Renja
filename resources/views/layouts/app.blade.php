@@ -61,7 +61,7 @@
                 </li> -->
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <span>{{ Auth::user()->Username ?? Auth::user()->name }}</span>
+                        <span>{{ isset(auth()->user()->pegawai) ? auth()->user()->pegawai->Nama : (auth()->user()->Username ?? auth()->user()->name) }}</span>
                         <img src="{{ asset('images/default-avatar.png') }}" class="img-circle elevation-1 ml-2" style="width: 26px; height: 26px;">
                         <span class="caret"></span>
                     </a>
