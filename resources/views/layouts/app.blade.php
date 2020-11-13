@@ -13,14 +13,15 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/vendor.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}?date={{ date('Ymd') }}"></script>
+    <script src="{{ asset('js/vendor.js') }}?date={{ date('Ymd') }}"></script>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?date={{ date('Ymd') }}" rel="stylesheet">
+    <link href="{{ asset('css/vendor.css') }}?date={{ date('Ymd') }}" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body class="hold-transition sidebar-mini avian">
@@ -152,6 +153,32 @@
             <strong>Copyright &copy; {{ date('Y') }} <a href="https://www.avianbrands.com">Avian Brands</a>.</strong> All rights reserved.
         </footer>
     </div>
+    <script>
+        $(function () {
+            bsCustomFileInput.init()
+
+            $('.datepicker').datepicker({
+                dateFormat: 'dd/mm/yy',
+            });
+
+            if (window.localStorage.getItem('sidebar')) {
+                $('body').addClass('sidebar-collapse');
+
+                $('.nav-item .nav-link p').removeClass('text-wrap');
+            }
+
+            $('a[data-widget=pushmenu]').on('click', function (e) {
+                if (!$('body').hasClass('sidebar-collapse')) {
+                    window.localStorage.setItem('sidebar', 'collapse');
+                    $('.nav-item .nav-link p').removeClass('text-wrap');
+                } else {
+                    window.localStorage.removeItem('sidebar');
+                    $('.nav-item .nav-link p').addClass('text-wrap');
+                }
+            });
+        });
+    </script>
+    @yield('js')
 </body>
 
 </html>

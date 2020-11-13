@@ -18,13 +18,14 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/adminlte/js/adminlte.min.js',
         'resources/adminlte/plugins/jquery-mousewheel/jquery.mousewheel.js',
         'resources/adminlte/plugins/raphael/raphael.min.js',
-        'resources/adminlte/plugins/jquery-mapael/jquery.mapael.min.js',
-        'resources/adminlte/plugins/jquery-mapael/maps/usa_states.min.js',
-        'resources/adminlte/plugins/jquery-mapael/maps/usa_states.min.js',
+        'resources/adminlte/plugins/jquery-ui/jquery-ui.min.js',
+        'resources/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js',
     ], 'public/js/vendor.js')
     .styles([
         'resources/adminlte/plugins/fontawesome-free/css/all.min.css',
         'resources/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
         'resources/adminlte/css/adminlte.min.css',
+        'resources/adminlte/plugins/jquery-ui/jquery-ui.min.css',
     ], 'public/css/vendor.css')
-    .copyDirectory('resources/adminlte/plugins/fontawesome-free/webfonts', 'public/webfonts');
+    .copyDirectory('resources/adminlte/plugins/fontawesome-free/webfonts', 'public/webfonts')
+    .copyDirectory('resources/adminlte/plugins/jquery-ui/images', 'public/css/images');
