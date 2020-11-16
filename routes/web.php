@@ -20,6 +20,9 @@ Auth::routes([
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/userguide', 'SecurityController@userguide')->name('userguide');
+Route::match(['get', 'post'], '/security', 'SecurityController@security')->name('security');
+
 Route::get('/test', function () {
     return response('Hello world.', 200);
 })->name('test')->middleware('permitted:7,delete');

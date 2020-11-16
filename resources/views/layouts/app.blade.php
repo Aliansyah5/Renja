@@ -68,11 +68,11 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-question-circle pr-3"></i>{{ __('User Guide') }}
+                        <a class="dropdown-item" href="{{ route('userguide') }}">
+                            <i class="fas fa-question-circle pr-3"></i>{{ __('Bantuan') }}
                         </a>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-key pr-3"></i>{{ __('Change Password') }}
+                        <a class="dropdown-item" href="{{ route('security') }}">
+                            <i class="fas fa-key pr-3"></i>{{ __('Ubah Password') }}
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
