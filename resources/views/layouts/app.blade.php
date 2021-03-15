@@ -166,6 +166,14 @@
                 theme: 'bootstrap4',
             });
 
+            let numeric = new AutoNumeric('.numeric', {
+                allowDecimalPadding: false,
+                decimalCharacter: ',',
+                digitGroupSeparator: '.',
+                decimalPlaces: 3,
+                decimalPlacesRawValue: 3,
+            });
+
             if (window.localStorage.getItem('sidebar')) {
                 $('body').addClass('sidebar-collapse');
 

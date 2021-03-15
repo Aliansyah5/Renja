@@ -15,6 +15,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <input type="text" class="form-control numeric" />
                 </div>
             </div>
         </div>

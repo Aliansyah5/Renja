@@ -27,18 +27,18 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-window.VueRouter = require("vue-router").default;
-const routes = [
-    {
-        path: "/",
-        component: require("./components/ExampleComponent.vue").default,
-    },
-];
-const router = new VueRouter({
-    routes,
-    linkActiveClass: "active",
-    linkExactActiveClass: "active",
-});
+// window.VueRouter = require("vue-router").default;
+// const routes = [
+//     {
+//         path: "/",
+//         component: require("./components/ExampleComponent.vue").default,
+//     },
+// ];
+// const router = new VueRouter({
+//     routes,
+//     linkActiveClass: "active",
+//     linkExactActiveClass: "active",
+// });
 
 const app = new Vue({
     el: "#app",

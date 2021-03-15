@@ -51,3 +51,9 @@ try {
 try {
     window.Promise = require('bluebird');
 } catch (e) {}
+
+try {
+    window.AutoNumeric = require('autonumeric');
+} catch (error) {
+    console.log('Unable to load AutoNumeric ' + error);
+}
