@@ -29,6 +29,7 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js',
         'resources/adminlte/plugins/datatables-rowgroup/js/dataTables.rowGroup.min.js',
         'resources/adminlte/plugins/datatables-rowgroup/js/rowGroup.bootstrap4.min.js',
+        'resources/adminlte/plugins/jquery-number/jquery.number.min.js',
     ], 'public/js/vendor.js')
     .styles([
         'resources/adminlte/plugins/fontawesome-free/css/all.min.css',
