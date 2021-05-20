@@ -19,8 +19,8 @@
 <body class="hold-transition login-page">
     <div id="app" class="login-box">
         <div class="login-logo">
-            <a href="/"><img src="{{ asset('images/avian-logo-normal.png') }}"></a>
-            <a href="/">{{ config('app.name', 'Laravel') }}</a>
+            <img src="{{ asset('images/avian-logo-normal.png') }}">
+            <a href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
