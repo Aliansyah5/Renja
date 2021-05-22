@@ -7,40 +7,28 @@
                     <p>Beranda</p>
                 </a>
             </li>
-            <li class="nav-item has-treeview {{ Route::is('master.*') ? 'menu-open' : '' }}">
-                <a href="#" class="nav-link {{ Route::is('master.*') ? 'active' : '' }}">
+            <li class="nav-item has-treeview menu-open">
+                <a href="#" class="nav-link active">
                     <i class="nav-icon fas fa-cog"></i>
                     <p>
-                        Master Data
+                        Menu 1
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route('master.template.index') }}" class="nav-link {{ Route::is('master.template.*') ? 'active' : '' }}">
+                        <a href="#" class="nav-link active">
                             <i class="fas fa-adjust nav-icon"></i>
-                            <p>Template Kartu</p>
+                            <p>Sub Menu 1</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('master.karyawan.index') }}" class="nav-link {{ Route::is('master.karyawan.*') ? 'active' : '' }}">
+                        <a href="#" class="nav-link">
                             <i class="fas fa-users nav-icon"></i>
-                            <p>Karyawan (AAP)</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('master.kartu.index') }}" class="nav-link {{ Route::is('master.kartu.*') ? 'active' : '' }}">
-                            <i class="fas fa-id-card nav-icon"></i>
-                            <p>Kartu</p>
+                            <p>Sub Menu 2</p>
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('kartu.index') }}" class="nav-link {{ Route::is('kartu.*') ? 'active' : '' }}">
-                    <i class="fas fa-print nav-icon"></i>
-                    <p>Kartu Karyawan</p>
-                </a>
             </li>
         </ul>
     </nav>

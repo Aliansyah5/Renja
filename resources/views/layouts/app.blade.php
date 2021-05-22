@@ -93,9 +93,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar elevation-4 sidebar-dark-avian">
             <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="brand-link navbar-avian">
+            <a href="/" class="brand-link navbar-avian">
                 <img src="{{ asset('images/avian-logo-icon.png') }}" alt="Avian Brands Logo" class="brand-image img-white">
-                <span class="brand-text font-weight-light text-sm">{{ config('app.name', 'Laravel') }}</span>
+                <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
             </a>
 
             <!-- Sidebar -->

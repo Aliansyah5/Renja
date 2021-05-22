@@ -142,7 +142,7 @@ return [
     |
     */
 
-    'path' => '/avia-card-management/',
+    'path' => '/'.Str::slug(config('app.name', 'avian-starter'), '-').'/',
 
     /*
     |--------------------------------------------------------------------------
