@@ -12,6 +12,12 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Theme style -->
+    <style>
+        @font-face {
+            font-family: "Poppins";
+            src: url("{{ asset('fonts/Poppins/Poppins-Regular.ttf') }}");
+        }
+    </style>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
 </head>

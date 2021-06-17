@@ -19,6 +19,12 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
+    <style>
+        @font-face {
+            font-family: "Poppins";
+            src: url("{{ asset('fonts/Poppins/Poppins-Regular.ttf') }}");
+        }
+    </style>
     <link href="{{ asset('css/app.css') }}?date={{ date('Ymd') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor.css') }}?date={{ date('Ymd') }}" rel="stylesheet">
     @yield('css')
@@ -133,13 +139,15 @@
                 theme: 'bootstrap4',
             });
 
-            let numeric = new AutoNumeric('.numeric', {
-                allowDecimalPadding: false,
-                decimalCharacter: ',',
-                digitGroupSeparator: '.',
-                decimalPlaces: 3,
-                decimalPlacesRawValue: 3,
-            });
+            if ($('.numeric').length > 0) {
+                let numeric = new AutoNumeric('.numeric', {
+                    allowDecimalPadding: false,
+                    decimalCharacter: ',',
+                    digitGroupSeparator: '.',
+                    decimalPlaces: 3,
+                    decimalPlacesRawValue: 3,
+                });
+            }
 
             if (window.localStorage.getItem('sidebar')) {
                 $('body').addClass('sidebar-collapse');

@@ -43,4 +43,5 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/adminlte/plugins/datatables-rowgroup/css/rowGroup.bootstrap4.min.css',
     ], 'public/css/vendor.css')
     .copyDirectory('resources/adminlte/plugins/fontawesome-free/webfonts', 'public/webfonts')
-    .copyDirectory('resources/adminlte/plugins/jquery-ui/images', 'public/css/images');
+    .copyDirectory('resources/adminlte/plugins/jquery-ui/images', 'public/css/images')
+    .copyDirectory("resources/fonts", "public/fonts");

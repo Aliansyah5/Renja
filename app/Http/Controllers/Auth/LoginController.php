@@ -56,13 +56,15 @@ class LoginController extends Controller
         }
 
         $user = MUser::where('Username', $request->username)
-            ->where('Passwd', $request->password)
+            // ->where('Passwd', $request->password)
             ->where('IsDel', 0)
             ->first();
 
-        if (isset($user)) {
-            auth()->login($user);
-            return $this->sendLoginResponse($request);
+        if ($user) {
+            if (trim($user->Passwd) == trim($request->password)) {
+                auth()->login($user);
+                return $this->sendLoginResponse($request);
+            }
         }
 
         $this->incrementLoginAttempts($request);
