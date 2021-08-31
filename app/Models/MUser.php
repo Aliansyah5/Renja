@@ -19,7 +19,8 @@ class MUser extends Authenticatable
     protected $hidden = ['Passwd'];
 
     protected $casts = [
-        'IsDel' => 'bool',
+        'IsAD' => 'boolean',
+        'IsDel' => 'boolean',
         'CreatedAt' => 'datetime',
         'UpdateAt' => 'datetime',
     ];

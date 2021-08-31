@@ -56,19 +56,33 @@ class LoginController extends Controller
         }
 
         $user = MUser::where('Username', $request->username)
-            // ->where('Passwd', $request->password)
             ->where('IsDel', 0)
             ->first();
 
         if ($user) {
-            if (trim($user->Passwd) == trim($request->password)) {
-                auth()->login($user);
-                return $this->sendLoginResponse($request);
+            if ($user->IsAD) {
+                $ldap = ldap_connect(env('LDAP_HOST', '192.168.110.110'), env('LDAP_PORT', 389));
+                ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+                if (@ldap_bind($ldap, $user->Username, $request->password)) {
+                    return $this->authenticate($request, $user);
+                }
+            } else {
+                if (trim($user->Passwd) == trim($request->password)) {
+                    return $this->authenticate($request, $user);
+                }
             }
         }
+
 
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    private function authenticate(Request $request, MUser $user)
+    {
+        auth()->login($user);
+
+        return $this->sendLoginResponse($request);
     }
 }
