@@ -63,7 +63,7 @@ class LoginController extends Controller
             if ($user->IsAD) {
                 $ldap = ldap_connect(env('LDAP_HOST', '192.168.110.110'), env('LDAP_PORT', 389));
                 ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
-                if (@ldap_bind($ldap, $user->Username, $request->password)) {
+                if (@ldap_bind($ldap, $user->Username.'@avianbrands.com', $request->password)) {
                     return $this->authenticate($request, $user);
                 }
             } else {
