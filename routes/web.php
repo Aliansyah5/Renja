@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,10 @@ Auth::routes([
 ]);
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/read-all', 'HomeController@read_all')->name('read_all');
+Route::get('/{id}/show', 'HomeController@show')->name('show');
+Route::get('/{id}/read', 'HomeController@read')->name('read');
+Route::get('/{id}/delete', 'HomeController@delete')->name('delete');
 
 Route::get('/userguide', 'SecurityController@userguide')->name('userguide');
 Route::match(['get', 'post'], '/security', 'SecurityController@security')->name('security');
