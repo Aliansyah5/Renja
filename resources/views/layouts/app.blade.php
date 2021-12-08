@@ -66,9 +66,22 @@
                         <i class="fas fa-cog"></i>
                     </a>
                 </li> -->
+                @if (auth()->user()->pegawai)
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-danger navbar-badge notification-unread-total">0</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <object 
+                            data="{{ request()->getSchemeAndHttpHost().'/avian-notification/public/list/'.auth()->user()->pegawai->Kode }}"
+                            style="width: 100%;height: 75vh;overflow: hidden;"></object>
+                    </div>
+                </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <span>{{ isset(auth()->user()->pegawai) ? auth()->user()->pegawai->Nama : (auth()->user()->Username ?? auth()->user()->name) }}</span>
+                        <span>{{ auth()->user()->pegawai ? auth()->user()->pegawai->Nama : (auth()->user()->Username ?? auth()->user()->name) }}</span>
                         <img src="{{ asset('images/default-avatar.png') }}" class="img-circle elevation-1 ml-2" style="width: 26px; height: 26px;">
                         <span class="caret"></span>
                     </a>
@@ -163,6 +176,17 @@
                     window.localStorage.removeItem('sidebar');
                     $('.nav-item .nav-link p').addClass('text-wrap');
                 }
+            });
+
+            const updateNotificationCounter = function () {
+                let unreadNotifications = parseInt(window.localStorage.getItem('unreadNotifications') || 0);
+                $('.notification-unread-total').text(unreadNotifications > 9 ? '9+' : unreadNotifications);
+            }
+
+            updateNotificationCounter();
+
+            window.addEventListener('storage', function () {
+                updateNotificationCounter();
             });
         });
     </script>
