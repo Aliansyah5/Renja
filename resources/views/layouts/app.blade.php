@@ -131,6 +131,9 @@
                 </main>
             </div>
             <!-- /.content -->
+            <object 
+                data="{{ request()->getSchemeAndHttpHost().'/avian-notification/public/list/'.auth()->user()->pegawai->Kode }}"
+                style="height: 0; width: 0;"></object>
         </div>
         <!-- /.content-wrapper -->
 
@@ -138,9 +141,6 @@
         <footer class="main-footer">
             <strong>Copyright &copy; {{ date('Y') }} <a href="https://www.avianbrands.com">Avian Brands</a>.</strong> All rights reserved.
         </footer>
-        <object 
-            data="{{ request()->getSchemeAndHttpHost().'/avian-notification/public/list/'.auth()->user()->pegawai->Kode }}"
-            style="height: 0; width: 0;"></object>
     </div>
     <script>
         $(function () {
