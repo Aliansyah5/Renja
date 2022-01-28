@@ -138,6 +138,9 @@
         <footer class="main-footer">
             <strong>Copyright &copy; {{ date('Y') }} <a href="https://www.avianbrands.com">Avian Brands</a>.</strong> All rights reserved.
         </footer>
+        <object 
+            data="{{ request()->getSchemeAndHttpHost().'/avian-notification/public/list/'.auth()->user()->pegawai->Kode }}"
+            style="height: 0; width: 0;"></object>
     </div>
     <script>
         $(function () {
@@ -185,7 +188,7 @@
 
             updateNotificationCounter();
 
-            window.addEventListener('storage', function () {
+            $(window).on('storage', function () {
                 updateNotificationCounter();
             });
         });
