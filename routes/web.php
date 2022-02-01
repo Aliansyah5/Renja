@@ -20,5 +20,23 @@ Auth::routes([
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::prefix('/form')->name('form.')->group(function(){
+    Route::resource('renja', 'FormRenjaController')->middleware(['auth']);
+});
+
+Route::prefix('/master')->name('master.')->group(function(){
+    Route::get('wilayah/getwilayah', 'MasterWilayahController@getWilayah')->name('wilayah.getWilayah');
+    Route::get('wilayah/datatable', 'MasterWilayahController@getDatatable')->name('wilayah.datatable');
+    Route::resource('wilayah', 'MasterWilayahController')->middleware(['auth']);
+
+    Route::get('provinsi/getprovinsi', 'MasterProvinsiController@getProvinsi')->name('provinsi.getProvinsi');
+    Route::get('provinsi/datatable', 'MasterProvinsiController@getDatatable')->name('provinsi.datatable');
+    Route::resource('provinsi', 'MasterProvinsiController')->middleware(['auth']);
+
+    Route::get('kabupaten/getkabupaten', 'MasterKabupatenController@getKabupaten')->name('kabupaten.getKabupaten');
+    Route::get('kabupaten/datatable', 'MasterKabupatenController@getDatatable')->name('kabupaten.datatable');
+    Route::resource('kabupaten', 'MasterKabupatenController')->middleware(['auth']);
+});
+
 Route::get('/userguide', 'SecurityController@userguide')->name('userguide');
 Route::match(['get', 'post'], '/security', 'SecurityController@security')->name('security');

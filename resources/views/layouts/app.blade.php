@@ -24,6 +24,19 @@
             font-family: "Poppins";
             src: url("{{ asset('fonts/Poppins/Poppins-Regular.ttf') }}");
         }
+        .tableform {
+            counter-reset: rowNumber;
+        }
+
+        .tableform tr {
+            counter-increment: rowNumber;
+        }
+
+        .tableform tr td:first-child::before {
+            content: counter(rowNumber);
+            min-width: 1em;
+            margin-right: 0.5em;
+        }
     </style>
     <link href="{{ asset('css/app.css') }}?date={{ date('Ymd') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor.css') }}?date={{ date('Ymd') }}" rel="stylesheet">
@@ -73,7 +86,7 @@
                         <span class="badge badge-danger navbar-badge notification-unread-total">0</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <object 
+                        <object
                             data="{{ request()->getSchemeAndHttpHost().'/avian-notification/public/list/'.auth()->user()->pegawai->Kode }}"
                             style="width: 100%;height: 75vh;overflow: hidden;"></object>
                     </div>
@@ -113,7 +126,7 @@
         <aside class="main-sidebar elevation-4 sidebar-dark-avian">
             <!-- Brand Logo -->
             <a href="/" class="brand-link navbar-avian">
-                <img src="{{ asset('images/avian-logo-icon.png') }}" alt="Avian Brands Logo" class="brand-image img-white">
+
                 <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
             </a>
 
@@ -131,7 +144,7 @@
                 </main>
             </div>
             <!-- /.content -->
-            <object 
+            <object
                 data="{{ request()->getSchemeAndHttpHost().'/avian-notification/public/list/'.auth()->user()->pegawai->Kode }}"
                 style="height: 0; width: 0;"></object>
         </div>
@@ -193,6 +206,7 @@
             });
         });
     </script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     @yield('js')
 </body>
 
