@@ -4,16 +4,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="p-0">Form Renja LKH</h1>
+            <h1 class="p-0">Master Client</h1>
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex flex-row justify-content-between">
-                        <div>Form Renja LKH List</div>
+                        <div>Master Client List</div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-outline-secondary btn-reload">
                                 <i class="fas fa-sync mr-2"></i>Reload
                             </button>
-                            <a href="{{ route('form.renja.create') }}" class="btn btn-sm btn-avian-secondary">
+                            <a href="{{ route('master.client.create') }}" class="btn btn-sm btn-avian-secondary">
                                 <i class="fas fa-plus mr-2"></i>Add
                             </a>
                         </div>
@@ -32,15 +32,7 @@
                         <thead>
                             <tr>
                                 <th width="0">No</th>
-                                <th data-priority="1">Kode Form</th>
-                                <th>PIC</th>
-                                <th>Aktifitas</th>
-                                <th>Kegiatan</th>
-                                <th>User</th>
-                                <th>Wilayah</th>
-                                <th>Provinsi</th>
-                                <th>Kabupaten</th>
-                                <th>Sub Cabang</th>
+                                <th>Client</th>
                                 <th data-priority="3">Action</th>
                             </tr>
                         </thead>
@@ -54,7 +46,7 @@
 
 @section('js')
 <script>
-    var baseurl = "{{route('form.renja.datatable')}}";
+    var baseurl = "{{route('master.client.datatable')}}";
     let table = $('.dataTable').dataTable({
         processing: true,
         orderClasses: false,
@@ -63,16 +55,8 @@
         paging: true,
         ajax: baseurl + '?' + $('#filter').serialize(),
         columns: [
-            {data: 'FormID', name: 'FormID', searchable: false},
-            {data: 'NoForm', name: 'NoForm'},
-            {data: 'Kabupaten', name: 'Kabupaten'},
-            {data: 'Pembina', name: 'Pembina'},
-            {data: 'Kegiatan', name: 'Kegiatan'},
-            {data: 'User', name: 'User'},
-            {data: 'Bagian', name: 'Bagian'},
-            {data: 'Provinsi', name: 'Provinsi'},
-            {data: 'Kabupaten', name: 'Kabupaten'},
-            {data: 'SubCabang', name: 'SubCabang'},
+            {data: 'ClientID', name: 'ClientID', searchable: false},
+            {data: 'Client', name: 'Client'},
             {data: 'action', name: 'action', orderable: false, searchable: false}
         ],
         order : ['0', 'desc'],

@@ -34,6 +34,12 @@
                             <p>Master Kabupaten</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('master.client.index') }}" class="nav-link {{ Route::is('master.client.*') ? 'active' : '' }}">
+                            <i class="fas fa-database nav-icon"></i>
+                            <p>Master Client</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item has-treeview {{ Route::is('form.*') ? 'menu-open' : '' }}">

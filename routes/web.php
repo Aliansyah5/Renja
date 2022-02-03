@@ -21,6 +21,8 @@ Auth::routes([
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('/form')->name('form.')->group(function(){
+    Route::get('renja/getnoform', 'FormRenjaController@getNoForm')->name('renja.getNoForm');
+    Route::get('renja/datatable', 'FormRenjaController@getDatatable')->name('renja.datatable');
     Route::resource('renja', 'FormRenjaController')->middleware(['auth']);
 });
 
@@ -36,6 +38,10 @@ Route::prefix('/master')->name('master.')->group(function(){
     Route::get('kabupaten/getkabupaten', 'MasterKabupatenController@getKabupaten')->name('kabupaten.getKabupaten');
     Route::get('kabupaten/datatable', 'MasterKabupatenController@getDatatable')->name('kabupaten.datatable');
     Route::resource('kabupaten', 'MasterKabupatenController')->middleware(['auth']);
+
+    Route::get('client/getclient', 'MasterClientController@getClient')->name('client.getClient');
+    Route::get('client/datatable', 'MasterClientController@getDatatable')->name('client.datatable');
+    Route::resource('client', 'MasterClientController')->middleware(['auth']);
 });
 
 Route::get('/userguide', 'SecurityController@userguide')->name('userguide');

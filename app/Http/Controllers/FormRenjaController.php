@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hrenja;
 use App\Models\Mkabupaten;
 use App\Models\Mprovinsi;
 use App\Models\Mwilayah;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class FormRenjaController extends Controller
@@ -46,17 +48,29 @@ class FormRenjaController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $wilid = Mkabupaten::max('KabID') + 1;
 
-        $data = [
-            "KabID" => $wilid,
-            "Provinsi" => $request->provinsi ?? '',
-            "Kabupaten" => $request->kabupaten ?? '',
-            'CreatedBy' => $user->UserID ?? 0,
-            'CreatedDate' => Carbon::now(),
-        ];
+        foreach($request->kode as $key => $value){
 
-        $header = Mkabupaten::create($data);
+            $wilid = Hrenja::max('FormID') + 1;
+
+            $data = [
+                "FormID" => $wilid,
+                "NoForm" => $request->kode[$key] ?? '',
+                "Pembina" => $request->pic[$key] ?? '',
+                "Aktifitas" => $request->aktifitas[$key] ?? '',
+                "Kegiatan" => $request->kegiatan[$key] ?? '',
+                "User" => $request->user[$key] ,
+                "Wilayah" => $request->wilayah[$key],
+                "Provinsi" => $request->provinsi[$key] ,
+                "Kabupaten" => $request->kabupaten[$key] ,
+                "SubCabang" => $request->subcabang[$key] ,
+                'CreatedBy' => $user->UserID ?? 0,
+                'CreatedDate' => Carbon::now()
+            ];
+
+
+            $header = Hrenja::create($data);
+        }
 
         return response()->json([
             'Code'             => 200,
@@ -127,7 +141,7 @@ class FormRenjaController extends Controller
      */
     public function destroy($id)
     {
-        $data = Mkabupaten::find($id)->delete();
+        $data = Hrenja::find($id)->delete();
         return new JsonResponse(["status" => true]);
 
     }
@@ -135,15 +149,18 @@ class FormRenjaController extends Controller
     public function getDatatable()
     {
 
-        $list = Mkabupaten::select('mkab.KabID','mprov.Provinsi','mkab.Kabupaten')
-        ->leftJoin('mprov', 'mkab.Provinsi', '=', 'mprov.provID')
+        $list =
+        Hrenja::select('hrenja.*', 'mwilayah.Bagian', 'mprov.Provinsi', 'mkab.Kabupaten')
+        ->leftJoin('mwilayah', 'hrenja.Wilayah', '=', 'mwilayah.WilayahID')
+        ->leftJoin('mprov', 'hrenja.Provinsi', '=', 'mprov.provID')
+        ->leftJoin('mkab', 'hrenja.Kabupaten', '=', 'mkab.kabID')
         ->get();
 
         return DataTables::of($list)
         ->addColumn('action', function ($data) {
-            $url_edit = route('master.kabupaten.edit',$data->KabID);
-            $url = route('master.kabupaten.show',$data->KabID);
-            $url_delete = route('master.kabupaten.destroy',$data->KabID);
+            $url_edit = route('form.renja.edit',$data->FormID);
+            $url = route('form.renja.show',$data->FormID);
+            $url_delete = route('form.renja.destroy',$data->FormID);
             $user = Auth::user();
 
             $edit = "";
@@ -153,10 +170,39 @@ class FormRenjaController extends Controller
             $delete = "";
             $delete = "<button data-url='".$url_delete."' onclick='return deleteData(this)' class='btn-action btn btn-danger btn-delete' title='Delete'><i class='fa fa-trash'></i></button>";
 
-            return $edit." ".$delete;
+            //return $edit." ".$delete;
+            return $delete;
 
         })
         ->rawColumns(['action'])
         ->make(true);
+    }
+
+    public function getNoForm(Request $request)
+    {
+        $user = Auth::user()->Username ;
+
+        $bulan = date('m');
+        $tahun = date('y');
+
+        $form = $request->pic.'-'.$request->kodeaktifitas.'-'.$request->user.'-'.substr($request->cabanguser, 0, 3)
+        .'-'.$tahun.$bulan.'-';
+
+        $fixform = strval($form);
+
+        $iteration = Hrenja::whereraw("NoForm like '%$fixform%'")
+            ->max(DB::raw('substring(NoForm, 21, 4)')) + 1;
+
+        if ($iteration <= 9) {
+            $kode = $fixform.'00'.($iteration);
+        } else if ($iteration <= 99) {
+            $kode =  $fixform.'0'.($iteration);
+        } else if ($iteration <= 999) {
+            $kode =  $fixform.'0'.($iteration);
+        } else {
+            $kode =  $fixform.($iteration);
+        }
+
+        return response()->json($kode);
     }
 }

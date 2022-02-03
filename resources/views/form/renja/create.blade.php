@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <form id="formInput" class="col-md-12" method="post" action="{{ ($data['typeForm'] == 'create') ? route('master.kabupaten.store') : route('master.kabupaten.update',$data['dataModel']->KabID) }}" enctype="multipart/form-data" autocomplete="off">
+        <form id="formInput" class="col-md-12" method="post" action="{{ ($data['typeForm'] == 'create') ? route('form.renja.store') : route('form.renja.update',$data['dataModel']->KabID) }}" enctype="multipart/form-data" autocomplete="off">
             {{ csrf_field() }}
             <!--buat overided form post !-->
             <input name="_method" type="hidden" value="">
@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="table-responsive table-sm">
-                                <table class="sticky-table table-avian stripe row-border order-column table table-striped table-bordered"
+                                <table class="table-avian stripe row-border order-column table table-striped table-bordered"
                                 style="width: 100%" >
                                     <thead>
                                         <tr>
@@ -58,9 +58,9 @@
                                     <tbody class="tableform" id="tableBodyForm">
                                         <tr id='trForm'>
                                             <td></td>
-                                            <td><input type='text' name='kode[]' class='form-control formkode' readonly></td>
-                                            <td><input type='text' name='pic[]' class='form-control formpic'></td>
-                                            <td>
+                                            <td style="min-width: 250px"><input type='text' name='kode[]' class='form-control formkode' readonly></td>
+                                            <td style="min-width: 200px"><input type='text' name='pic[]' class='form-control formpic' value="{{ Auth::user()->pegawai->Kode }}"></td>
+                                            <td style="min-width: 200px">
                                                 <select name='aktifitas[]' class="form-control select2 selectAktifitas">
                                                     <option value=''>Pilih Aktifitas</option>
                                                     <option value='VISIT' data-kode='VIS'>VISIT</option>
@@ -72,20 +72,20 @@
                                             <td>
                                                 <input type="text" name="kegiatan[]" class="form-control formkegiatan" style="min-width: 300px">
                                             </td>
-                                            <td><input type="text" name="user[]" class="form-control formuser"></td>
-                                            <td>
+                                            <td style="min-width: 200px"><input type="text" name="user[]" class="form-control formuser"></td>
+                                            <td style="min-width: 200px">
                                                 <select name='wilayah[]' class="form-control select2 selectWilayah">
                                                     <option value=''>Pilih Wilayah</option>
                                                     @foreach ($data['Wilayah'] as $item)
-                                                    <option value="{{ $item->WilayahID }}" >{{ $item->Bagian }}</option>
+                                                    <option value="{{ $item->WilayahID }}" data-kode="{{ $item->KodeKabupaten }}" >{{ $item->Bagian }}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td style="min-width: 200px">
                                                 <select name='provinsi[]' class="form-control select2 selectProvinsi">
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td style="min-width: 200px">
                                                 <select name='kabupaten[]' class="form-control select2 selectKabupaten">
                                                 </select>
                                             </td>
@@ -198,15 +198,43 @@
                 parentRowForm.find('.selectKabupaten option').remove();
                 var option = "<option value=''>Pilih Provinsi</option>";
                 if(data.length > 0){
-                    console.log('ikidata', data)
                     $.each( data, function( key, value ) {
-                        option += "<option value='"+value.KabID+"'>"+value.Kabupaten+"</option>";
+                        option += "<option value='"+value.KabID+"' data-kode='"+value.KodeKabupaten+"' >"+value.Kabupaten+"</option>";
                     });
                     parentRowForm.find(".selectKabupaten").append(option);
                 }else{
                     parentRowForm.find('.selectKabupaten option').remove();
                 }
             });
+        });
+
+        $(document.body).on("change",".selectKabupaten",function(e){
+            e.preventDefault();
+            var obj = $(this);
+            var parentRowForm = obj.closest("tr");
+            var namauser =  parentRowForm.find('.formuser').val();
+            var user = namauser.slice(0, 3);
+            var namapic =  parentRowForm.find('.formpic').val();
+            var pic = namapic.slice(0, 2);
+            var kodekabupaten = parentRowForm.find('.selectKabupaten option:selected').data('kode');
+            var kodeaktifitas =  parentRowForm.find('.selectAktifitas option:selected').data('kode');
+            var cabanguser = $(this).find('option:selected').data('kode');
+
+            $.ajax({
+                url: "{{route('form.renja.getNoForm')}}",
+                data: {
+                    user : user,
+                    kodekabupaten : kodekabupaten,
+                    kodeaktifitas : kodeaktifitas,
+                    cabanguser : cabanguser,
+                    pic : pic,
+                },
+                dataType: "json",
+            }).done(function(data) {
+                console.log('ikidata', data);
+                parentRowForm.find('.formkode').val(data);
+            });
+
         });
 
         function addRowFormulasi() {
@@ -311,7 +339,7 @@
                 if(data.Code == 200){
                     toastr.success(data.Message);
                     setTimeout(function(){
-                        redirect('{{route('master.kabupaten.index')}}');
+                        redirect('{{route('form.renja.index')}}');
                     }, 1500);
                 }else{
                     toastr.error(data.Message);
